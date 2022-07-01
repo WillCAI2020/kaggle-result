@@ -8,6 +8,8 @@ from utils.utils import *
 from utils.Validator import *
 from utils.Crackloader import *
 from model.crackformer.deepcrack import DeepCrack
+from git.repo import Repo
+from git.repo.fun import is_git_dir
 import cv2
 
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
@@ -91,6 +93,15 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
         if epoch % 2 == 0:
             print("test.txt valid")
             validator.validate(epoch)
+            local_path = '/kaggle/working/kaggle-crackFormer'
+            git_local_path = os.path.join(local_path, '.git')
+            if is_git_dir(git_local_path):
+                repo = Repo(local_path) # 已经存在git仓库
+                repo.git.add(valid_result_dir)
+                repo.git.add(valid_log_dir)
+                repo.git.add(best_model_dir)
+                repo.git.commit('-m', 'epoch {}'.format(epoch))
+                repo.git.push()
 
 if __name__ == '__main__':
 
