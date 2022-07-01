@@ -1,4 +1,5 @@
 import shutil
+import time
 from PIL import Image
 import torch.nn as nn
 from torch.autograd import Variable
@@ -10,9 +11,9 @@ from model.crackformer.deepcrack import DeepCrack
 import cv2
 
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
-os.environ["CUDA_VISIBLE_DEVICES"] = '-1'
+os.environ["CUDA_VISIBLE_DEVICES"] = '0,1,2,3'
 
-device = torch.device("cpu")
+# device = torch.device("cpu")
 
 def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, valid_lab_dir,
             valid_result_dir, valid_log_dir, best_model_dir, image_format, lable_format, pretrain_dir=None):
@@ -27,13 +28,13 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
     # 这是根据机器有几块GPU进行选择
     print('Using', torch.cuda.device_count(), 'GPUs.')
     if torch.cuda.device_count() > 1:
-        crack = nn.DataParallel(net).to(device)
+        crack = nn.DataParallel(net).cuda()
     else:
-        crack = net.to(device)  # 如果没有多块GPU需要用这种方法
+        crack = net.cuda()  # 如果没有多块GPU需要用这种方法
 
     # 可以加载训练好的模型
     if pretrain_dir is not None:
-        crack = torch.load(pretrain_dir).to(device)
+        crack = torch.load(pretrain_dir).cuda()
 
     # 生成验证器
     validator = Validator(valid_img_dir, valid_lab_dir,
@@ -63,8 +64,8 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
             loss = 0
             
             # 前向传播部分
-            images = Variable(images).to(device)
-            labels = Variable (labels.float()).to(device)
+            images = Variable(images).cuda()
+            labels = Variable (labels.float()).cuda()
 
             output = crack.forward(images)
             for out in output:
@@ -83,7 +84,8 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
                 info = 'Epoch: [{0}/{1}][{2}/{3}] '.format(epoch, total_epoch, count, len(img_batch)) + \
                     'Loss {loss.val:f} (avg:{loss.avg:f} lr {lr:.10f}) '.format(
                         loss=losses, lr=lr)
-
+                with open(valid_log_dir + "/loss.txt", 'a', encoding='utf-8') as fout:
+                    fout.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + '：' + info)
                 print(info)
             # validator.validate(i)
         if epoch % 2 == 0:
@@ -92,7 +94,7 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
 
 if __name__ == '__main__':
 
-    datasetName="CrackLS315"
+    datasetName="CrackTree260"
     dataName= "train"
     netName = "crackformer"
     # 
@@ -107,7 +109,7 @@ if __name__ == '__main__':
 
     net = crackformer()
 
-    train_img_dir = "./datasets/"+ datasetName +"/train/" + dataName +".txt"
+    train_img_dir = "./datasets/"+ datasetName +"/" + dataName +".txt"
     valid_img_dir = "./datasets/"+datasetName+"/valid/50a/"
     valid_lab_dir = "./datasets/"+datasetName+"/valid/50b/"
     valid_result_dir = "./datasets/"+datasetName+ "/valid/50res/"
