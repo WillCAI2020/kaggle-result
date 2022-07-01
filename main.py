@@ -96,12 +96,15 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
             local_path = '/kaggle/working/kaggle-crackFormer'
             git_local_path = os.path.join(local_path, '.git')
             if is_git_dir(git_local_path):
+                print('开始上传结果')
                 repo = Repo(local_path) # 已经存在git仓库
+                repo.git.remote.add('origin', 'https://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@github.com/WillCAI2020/kaggle-result.git')
                 repo.git.add(valid_result_dir)
                 repo.git.add(valid_log_dir)
                 repo.git.add(best_model_dir)
                 repo.git.commit('-m', 'epoch {}'.format(epoch))
                 repo.git.push()
+                print('上传结束')
 
 if __name__ == '__main__':
 
