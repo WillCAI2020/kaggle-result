@@ -94,7 +94,7 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
 
 if __name__ == '__main__':
 
-    datasetName="CrackTree260"
+    datasetName="CrackLS315"
     dataName= "train"
     netName = "crackformer"
     # 
@@ -110,9 +110,9 @@ if __name__ == '__main__':
     net = crackformer()
 
     train_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+ datasetName +"/" + dataName +".txt"
-    valid_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50a/"
-    valid_lab_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50b/"
-    valid_result_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+ "/valid/50res/"
+    valid_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/70a/"
+    valid_lab_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/70b/"
+    valid_result_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+ "/valid/70res/"
     valid_log_dir = "/kaggle/working/kaggle-crackFormer/log/" + netName 
     best_model_dir = "/kaggle/working/kaggle-crackFormer/model/" + datasetName +"/"
     # pretrain_dir=""

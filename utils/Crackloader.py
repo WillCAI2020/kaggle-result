@@ -78,8 +78,8 @@ class Crackloader(data.Dataset):
                 line_list = line.split(' ')
                 dataset.append([line_list[0], line_list[1]])
         # 打印 dataset
-        for i in dataset:
-            print('debug：' + str(i) + '\n')
+        # for i in dataset:
+        #     print('debug：' + str(i) + '\n')
         return dataset
         return dataset
 
