@@ -19,7 +19,7 @@ if __name__ == '__main__':
     if is_git_dir(git_local_path):
         print('开始上传结果')
         repo = Repo(local_path) # 已经存在git仓库
-        repo.git.remote('add', 'origin', 'https://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@github.com/WillCAI2020/kaggle-result.git')
+        # repo.git.remote('add', 'origin', 'https://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@github.com/WillCAI2020/kaggle-result.git')
         repo.git.add(valid_result_dir)
         repo.git.add(valid_log_dir)
         repo.git.add(best_model_dir)
