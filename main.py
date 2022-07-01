@@ -109,12 +109,12 @@ if __name__ == '__main__':
 
     net = crackformer()
 
-    train_img_dir = "./datasets/"+ datasetName +"/" + dataName +".txt"
-    valid_img_dir = "./datasets/"+datasetName+"/valid/50a/"
-    valid_lab_dir = "./datasets/"+datasetName+"/valid/50b/"
-    valid_result_dir = "./datasets/"+datasetName+ "/valid/50res/"
-    valid_log_dir = "./log/" + netName 
-    best_model_dir = "./model/" + datasetName +"/"
+    train_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+ datasetName +"/" + dataName +".txt"
+    valid_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50a/"
+    valid_lab_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50b/"
+    valid_result_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+ "/valid/50res/"
+    valid_log_dir = "/kaggle/working/kaggle-crackFormer/log/" + netName 
+    best_model_dir = "/kaggle/working/kaggle-crackFormer/model/" + datasetName +"/"
     # pretrain_dir=""
     trainer(net, total_epoch, lr_init, batch_size, train_img_dir, valid_img_dir, valid_lab_dir,
             valid_result_dir, valid_log_dir, best_model_dir,  image_format, lable_format) #, pretrain_dir=pretrain_dir
