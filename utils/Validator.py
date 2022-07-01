@@ -140,6 +140,7 @@ class Validator(object):
                 image = cv2.imread(image)
                 x = Variable(self.transforms(image))
                 x = x.unsqueeze(0)
+                x = x.cuda() # 解决 Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
                 outs = self.net.forward(x)  # 前向传播，得到处理后的图像y（tensor形式）
                 y = outs[-1]
                 output = torch.sigmoid(y)
