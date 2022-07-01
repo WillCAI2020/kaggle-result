@@ -110,8 +110,8 @@ if __name__ == '__main__':
     net = crackformer()
 
     train_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+ datasetName +"/" + dataName +".txt"
-    valid_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/70a/"
-    valid_lab_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/70b/"
+    valid_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50a/"
+    valid_lab_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50b/"
     valid_result_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+ "/valid/70res/"
     valid_log_dir = "/kaggle/working/kaggle-crackFormer/log/" + netName 
     best_model_dir = "/kaggle/working/kaggle-crackFormer/model/" + datasetName +"/"
