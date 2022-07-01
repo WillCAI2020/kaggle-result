@@ -2,37 +2,27 @@ import os
 from git.repo import Repo
 from git.repo.fun import is_git_dir
 
+if __name__ == '__main__':
+    datasetName="CrackLS315"
+    dataName= "train"
+    netName = "crackformer"
 
-class myGit(object):
-    """
-    git仓库管理
-    """
-
-    def __init__(self, local_path, repo_url, branch='main'):
-        self.local_path = local_path
-        self.repo_url = repo_url
-        self.repo = None
-        self.initial(repo_url, branch)
-
-    def initial(self, repo_url, branch):
-        """
-        初始化git仓库
-        :param repo_url:
-        :param branch:
-        :return:
-        """
-        if not os.path.exists(self.local_path):
-            os.makedirs(self.local_path)
-
-        git_local_path = os.path.join(self.local_path, '.git')
-        if is_git_dir(git_local_path):
-            self.repo = Repo(self.local_path) # 已经存在git仓库
+    train_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+ datasetName +"/" + dataName +".txt"
+    valid_img_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50a/"
+    valid_lab_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+"/valid/50b/"
+    valid_result_dir = "/kaggle/working/kaggle-crackFormer/datasets/"+datasetName+ "/valid/50res/"
+    valid_log_dir = "/kaggle/working/kaggle-crackFormer/log/" + netName 
+    best_model_dir = "/kaggle/working/kaggle-crackFormer/model/" + datasetName +"/"
     
-    
-    
-    def push(self):
-        """
-        推送到远程仓库
-        :return:
-        """
-        self.repo.git.push()
+    local_path = '/kaggle/working/kaggle-crackFormer'
+    git_local_path = os.path.join(local_path, '.git')
+    if is_git_dir(git_local_path):
+        print('开始上传结果')
+        repo = Repo(local_path) # 已经存在git仓库
+        repo.git.remote.add('origin', 'https://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@github.com/WillCAI2020/kaggle-result.git')
+        repo.git.add(valid_result_dir)
+        repo.git.add(valid_log_dir)
+        repo.git.add(best_model_dir)
+        repo.git.commit('-m', 'OK')
+        repo.git.push()
+        print('上传结束')
