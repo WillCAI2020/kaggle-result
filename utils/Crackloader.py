@@ -77,6 +77,7 @@ class Crackloader(data.Dataset):
                 line = ''.join(line).strip()
                 line_list = line.split(' ')
                 dataset.append([line_list[0], line_list[1]])
+        print('debug：' + dataset)
         return dataset
 
 
