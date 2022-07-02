@@ -119,7 +119,7 @@ if __name__ == '__main__':
     # lr_init = 0.001
     total_epoch = 500
     lr_init = 0.001
-    batch_size = 10
+    batch_size = 3
 
     net = crackformer()
 
