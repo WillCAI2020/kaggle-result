@@ -3,3 +3,4 @@ epoch:4 | ODS:0.300164 | OIS:nan | max ODS:0.300164 | max OIS:nan
 epoch:6 | ODS:0.363222 | OIS:nan | max ODS:0.363222 | max OIS:nan 
 epoch:8 | ODS:0.403374 | OIS:nan | max ODS:0.403374 | max OIS:nan 
 epoch:10 | ODS:0.387492 | OIS:nan | max ODS:0.403374 | max OIS:nan 
+epoch:12 | ODS:0.413496 | OIS:nan | max ODS:0.413496 | max OIS:nan 
