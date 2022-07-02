@@ -87,7 +87,7 @@ def trainer(net, total_epoch, lr_init, batch_size,train_img_dir, valid_img_dir, 
                     'Loss {loss.val:f} (avg:{loss.avg:f} lr {lr:.10f}) '.format(
                         loss=losses, lr=lr)
                 with open(valid_log_dir + "/loss.txt", 'a', encoding='utf-8') as fout:
-                    fout.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + '：' + info)
+                    fout.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + '：' + info + '\n')
                 print(info)
             # validator.validate(i)
         if epoch % 2 == 0:
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     # lr_init = 0.001
     total_epoch = 500
     lr_init = 0.001
-    batch_size = 1
+    batch_size = 100
 
     net = crackformer()
 
