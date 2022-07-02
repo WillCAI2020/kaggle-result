@@ -18,3 +18,4 @@ epoch:34 | ODS:0.557584 | OIS:nan | max ODS:0.557584 | max OIS:nan
 epoch:36 | ODS:0.560662 | OIS:nan | max ODS:0.560662 | max OIS:nan 
 epoch:38 | ODS:0.552236 | OIS:nan | max ODS:0.560662 | max OIS:nan 
 epoch:40 | ODS:0.508567 | OIS:nan | max ODS:0.560662 | max OIS:nan 
+epoch:42 | ODS:0.579811 | OIS:nan | max ODS:0.579811 | max OIS:nan 
